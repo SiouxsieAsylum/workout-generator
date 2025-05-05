@@ -6,12 +6,26 @@ import axios from '../node_modules/axios/index'
 
 function App() {
   const [text, setText] = useState('');
+  const [workout, setWorkout] = useState([]);
 
   const sendForText = () => {
     axios.get('http://localhost:2000/api')
     .then(response => {
       const { data } = response;
       setText(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const sendForWorkout = () => {
+    axios.post('http://localhost:2000/api/workout', {
+      bodyPart: 'legs'
+    })
+    .then(response => {
+      const { data } = response;
+      setWorkout(data)
     })
     .catch(err => {
       console.log(err)
@@ -33,9 +47,15 @@ function App() {
         <button onClick={() => sendForText()}>
           <p>{text}</p>
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <button onClick={() => sendForWorkout()}>
+          <p>Send for Workout</p>
+        </button>
+        {
+          workout.forEach(exercise => {
+            return <p>{exercise.name}</p>
+          })
+        }
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more

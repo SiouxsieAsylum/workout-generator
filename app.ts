@@ -1,13 +1,19 @@
 import express from "express";
 import cors from 'cors';
+import { PORT } from "./config/models";
+import { generateWorkout } from "./src/service";
 
 const app = express();
-
-export type PORT = 2000 | 5000 | 10000;
 
 const port: PORT = 2000;
 
 app.use(cors());
+app.use(express.json())
+
+app.post('/api/workout', (req, res) => {
+    console.log(req.body)
+    res.json(generateWorkout(req.body.bodyPart))
+})
 
 app.get('/api', (req, res) => {
     res.send('i heard there was a button here')
