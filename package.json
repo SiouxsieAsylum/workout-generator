@@ -1,0 +1,32 @@
+{
+  "name": "express-ts",
+  "version": "1.0.0",
+  "description": "express server running on typescript",
+  "main": "app.ts",
+  "engines": {
+    "node": ">=20.19.1",
+    "npm": ">=10.8.2"
+  },
+  "scripts": {
+    "test": "test",
+    "dev:server": "nodemon app.ts",
+    "dev:client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dependencies:server": "npm install",
+    "dependencies:client": "npm install --prefix client",
+    "setup": "concurrently \"npm run dependencies:server\" \"npm run dependencies:client\""
+  },
+  "author": "DreDotJs",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
+  }
+}
